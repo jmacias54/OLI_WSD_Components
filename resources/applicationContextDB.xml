@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/jpa 
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/jee 
+        http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:general.properties</value>
+		</property>
+	</bean>
+
+
+	<jee:jndi-lookup id="dsAmx" jndi-name="${database.jndi}"
+		cache="true" expected-type="javax.sql.DataSource" />
+
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dsAmx" />
+	</bean>
+
+	 <bean id="nNotaDAO" class="mx.com.amx.unotv.oli.wsd.components.dao.NNotaDAO"></bean>  
+	  <bean id="iNotaMagazineDAO" class="mx.com.amx.unotv.oli.wsd.components.dao.INotaMagazineDAO"></bean>  
+
+
+
+</beans>
