@@ -73,4 +73,27 @@ public class NNotaController {
 			throw new ControllerException(e.getMessage());
 		}
 	}
+	
+	
+	@RequestMapping(value = "/findByIdMagazine/{idMagazine}", method = RequestMethod.POST)
+	@ResponseBody
+	public NNotaResponse findByIdMagazine(@PathVariable String idMagazine ) throws ControllerException {
+		logger.debug(" --- findByIdMagazine  [ NNotaController ]  --- ");
+		logger.debug(" ---  idMagazine : "+idMagazine+"  --- ");
+
+		
+		
+		NNotaResponse response = null;
+		
+		try {
+			
+			response = new NNotaResponse();
+			response.setLista(nNotaDAO.findByIdMagazine(idMagazine));
+			return response;
+
+		} catch (Exception e) {
+			logger.error(" ¡ Error findByIdMagazine  [ NNotaController ] ! ", e);
+			throw new ControllerException(e.getMessage());
+		}
+	}
 }
